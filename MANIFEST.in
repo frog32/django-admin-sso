@@ -1,0 +1,7 @@
+include AUTHORS
+include LICENSE
+include README.rst
+recursive-include django_sso/templates *.html
+recursive-include django_sso/locale *.po
+recursive-include django_sso/locale *.mo
+recursive-include django_sso/static *.js

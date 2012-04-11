@@ -1,0 +1,10 @@
+*.pyc
+*~
+.*.swp
+\#*#
+.DS_Store
+._*
+/pennyblack.egg-info
+*.sqlite
+/dist
+/build
