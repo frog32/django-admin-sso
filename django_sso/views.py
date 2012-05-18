@@ -16,13 +16,15 @@ openid_store = FileOpenIDStore('/tmp/djopenid_c_store')
 
 
 class OpenIDMixin(object):
-    trust_root_url = 'django_sso.root'
     return_to_url = 'django_sso.return'
     
-    def get_url(self, url):
+    def get_url(self, url=None):
         scheme = self.request.is_secure() and 'https' or 'http'
         primary_site = RequestSite(self.request)
-        path = reverse(url)
+        if url:
+            path = reverse(url)
+        else:
+            path = "/"
         return '%s://%s%s' % (scheme, primary_site.domain, path)
     
     def get_consumer(self):
@@ -37,7 +39,7 @@ class StartOpenIDView(View, OpenIDMixin):
         c = self.get_consumer()
         auth_request = c.begin(settings.DJANGO_SSO_OPENID_ENDPOINT)
 
-        trust_root = self.get_url(self.trust_root_url)
+        trust_root = self.get_url()
         return_to = self.get_url(self.return_to_url)
         print 'can ax', auth_request.endpoint.supportsType(ax.AXMessage.ns_uri)
         # Add Attribute Exchange request information.
