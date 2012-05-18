@@ -16,7 +16,7 @@ class DjangoSSOAuthBackend(object):
             return None
     
     def authenticate(self, **kwargs):
-        response = kwargs.pop('openid_response')
+        response = kwargs.pop('openid_response', None)
         if not response:
             return None
         user_data = {}
