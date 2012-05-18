@@ -35,7 +35,7 @@ class OpenIDMixin(object):
 class StartOpenIDView(View, OpenIDMixin):
     def get(self, request, *args, **kwargs):
         c = self.get_consumer()
-        auth_request = c.begin('https://www.google.com/accounts/o8/id')
+        auth_request = c.begin(settings.DJANGO_SSO_OPENID_ENDPOINT)
 
         trust_root = self.get_url(self.trust_root_url)
         return_to = self.get_url(self.return_to_url)

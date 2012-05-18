@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 ASSIGNMENT_ANY = 0
@@ -13,3 +14,7 @@ AX_MAPPING = (('http://schema.openid.net/contact/email', 'email'),
               ('http://axschema.org/namePerson', 'fullname'),
               ('http://axschema.org/namePerson/first', 'firstname'),
               ('http://axschema.org/namePerson/last', 'lastname'))
+
+DJANGO_SSO_ADD_LOGIN_BUTTON = getattr(settings, 'DJANGO_SSO_ADD_LOGIN_BUTTON', True)
+
+DJANGO_SSO_OPENID_ENDPOINT = getattr(settings, 'DJANGO_SSO_OPENID_ENDPOINT', 'https://www.google.com/accounts/o8/id')
