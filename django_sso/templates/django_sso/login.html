@@ -1,0 +1,6 @@
+{% extends "admin/login.html" %}
+{% load i18n %}
+{% block content %}
+{{block.super}}
+<a href="{% url django_sso.root %}">{% trans "Log in using SSO" %}</a>
+{% endblock content %}
