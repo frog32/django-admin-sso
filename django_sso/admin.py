@@ -5,7 +5,8 @@ from django_sso.models import Assignment
 
 
 class AssignmentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('__unicode__', 'username', 'username_mode', 'domain', 'user', 'weight')
+    list_editable = ('username', 'username_mode', 'domain', 'user', 'weight')
 
 admin.site.register(Assignment, AssignmentAdmin)
 
