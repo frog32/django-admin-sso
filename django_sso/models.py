@@ -21,7 +21,7 @@ class Assignment(models.Model):
 
 
 class OpenIDUser(models.Model):
-    claimed_id = models.TextField(max_length=2047, unique=True)
+    claimed_id = models.TextField(max_length=2047)
     email = models.EmailField()
     fullname = models.CharField(max_length=255)
     user = models.ForeignKey('auth.User')
