@@ -8,11 +8,11 @@ from django.views.generic import View
 from openid.consumer import consumer
 from openid.extensions import ax, pape, sreg
 from openid.store.memstore import MemoryStore
-from openid.store.filestore import FileOpenIDStore
 
 from django_sso import settings
+from django_sso.store import DjangoOpenIDStore
 
-openid_store = FileOpenIDStore('/tmp/djopenid_c_store')
+openid_store = DjangoOpenIDStore()
 
 
 class OpenIDMixin(object):
