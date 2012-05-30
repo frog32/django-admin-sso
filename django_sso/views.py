@@ -15,7 +15,7 @@ openid_store = DjangoOpenIDStore()
 
 
 class OpenIDMixin(object):
-    return_to_url = 'django_sso.return'
+    return_to_url = 'admin:django_sso_openiduser_return'
 
     def get_url(self, url=None):
         scheme = self.request.is_secure() and 'https' or 'http'
