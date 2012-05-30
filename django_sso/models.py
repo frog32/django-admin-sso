@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+try:
+    from django.utils.timezone import now
+except ImportError:
+    from datetime.datetime import now
 
 from django_sso import settings
 
@@ -17,7 +21,7 @@ class Assignment(models.Model):
         ordering = ('-weight',)
 
     def __unicode__(self):
-        return u"%s@%s" % (dict(settings.ASSIGNMENT_CHOICES)[self.username_mode], self.domain)
+        return u"%s(%s) @%s" % (dict(settings.ASSIGNMENT_CHOICES)[self.username_mode], self.username, self.domain)
 
 
 class OpenIDUser(models.Model):
@@ -25,6 +29,18 @@ class OpenIDUser(models.Model):
     email = models.EmailField()
     fullname = models.CharField(max_length=255)
     user = models.ForeignKey('auth.User')
+    last_login = models.DateTimeField(_('last login'), default=now)
+    
+    class Meta:
+        verbose_name = _('OpenIDUser')
+        verbose_name_plural = _('OpenIDUsers')
+    
+    def __unicode__(self):
+        return self.claimed_id
+    
+    def update_last_login(self):
+        self.last_login = now()
+        self.save()
 
 
 class Nonce(models.Model):

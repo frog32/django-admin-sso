@@ -38,6 +38,7 @@ class DjangoSSOAuthBackend(object):
         except OpenIDUser.DoesNotExist:
             pass
         else:
+            openid_user.user.active_openid_user = openid_user
             return openid_user.user
         
         email = user_data.get('email')
@@ -67,4 +68,5 @@ class DjangoSSOAuthBackend(object):
         user_data['fullname'] = user_data['fullname'] or first_and_lastname
         user_data.update(user=used_assignment.user)
         openid_user = OpenIDUser.objects.create(**user_data)
+        openid_user.user.active_openid_user = openid_user
         return openid_user.user

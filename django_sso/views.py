@@ -41,19 +41,18 @@ class StartOpenIDView(View, OpenIDMixin):
 
         trust_root = self.get_url()
         return_to = self.get_url(self.return_to_url)
-        print 'can ax', auth_request.endpoint.supportsType(ax.AXMessage.ns_uri)
-        # Add Attribute Exchange request information.
-        ax_request = ax.FetchRequest()
-        # XXX - uses myOpenID-compatible schema values, which are
-        # not those listed at axschema.org.
-        for ax_name, field_name in settings.AX_MAPPING:
-            ax_request.add(ax.AttrInfo(ax_name, required=True))
-        auth_request.addExtension(ax_request)
-        
-        # sreg_request = sreg.SRegRequest(optional=['email', 'nickname'],
-        #                                 required=['dob'])
-        # auth_request.addExtension(sreg_request)
-        
+        if auth_request.endpoint.supportsType(ax.AXMessage.ns_uri):
+            # Add Attribute Exchange request information.
+            ax_request = ax.FetchRequest()
+            # XXX - uses myOpenID-compatible schema values, which are
+            # not those listed at axschema.org.
+            for ax_name, field_name in settings.AX_MAPPING:
+                ax_request.add(ax.AttrInfo(ax_name, required=True))
+            auth_request.addExtension(ax_request)
+        else:
+            sreg_request = sreg.SRegRequest(required=['email', 'nickname'])
+            auth_request.addExtension(sreg_request)
+            
         if auth_request.shouldSendRedirect():
             url = auth_request.redirectURL(trust_root, return_to)
             return HttpResponseRedirect(url)
@@ -71,15 +70,11 @@ class FinishOpenIDView(View, OpenIDMixin):
             return_to = self.get_url(self.return_to_url)
             response = c.complete(request.REQUEST, return_to)
             if response.status == consumer.SUCCESS:
-                print 'success'
                 user = authenticate(openid_response=response)
-                print 'user', user
                 if user and user.is_active:
+                    user.active_openid_user.update_last_login()
                     login(request, user)
-                    return HttpResponseRedirect('/admin/')
-            else:
-                result = response.status
-        return HttpResponse('error')
+        return HttpResponseRedirect(reverse('admin:index'))
 
     def post(self, *args, **kwargs):
         return self.get(*args, **kwargs)
