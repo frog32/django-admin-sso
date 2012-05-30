@@ -1,3 +1,4 @@
+# this file is from django-openid-auth
 # django-openid-auth -  OpenID integration for django.contrib.auth
 #
 # Copyright (C) 2007 Simon Willison
@@ -39,7 +40,7 @@ from django_sso.models import Association, Nonce
 
 class DjangoOpenIDStore(OpenIDStore):
     def __init__(self):
-        self.max_nonce_age = 6 * 60 * 60 # Six hours
+        self.max_nonce_age = 6 * 60 * 60  # Six hours
 
     def storeAssociation(self, server_url, association):
         try:

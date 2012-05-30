@@ -5,12 +5,12 @@ from setuptools import setup
 import django_sso
 setup(
     name='django-sso',
-    version = django_sso.__version__,
-    description = 'django sso solution',
+    version=django_sso.__version__,
+    description='django sso solution',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
-    author = 'Marc Egli',
-    author_email = 'egli@allink.ch',
-    url = 'http://github.com/frog32/django-sso/',
+    author='Marc Egli',
+    author_email='egli@allink.ch',
+    url='http://github.com/frog32/django-sso/',
     license='BSD License',
     platforms=['OS Independent'],
     packages=[
@@ -30,5 +30,5 @@ setup(
     requires=[
         'Django(>=1.3)',
     ],
-    include_package_data=True,    
+    include_package_data=True,
 )

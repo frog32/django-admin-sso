@@ -16,7 +16,7 @@ openid_store = DjangoOpenIDStore()
 
 class OpenIDMixin(object):
     return_to_url = 'django_sso.return'
-    
+
     def get_url(self, url=None):
         scheme = self.request.is_secure() and 'https' or 'http'
         primary_site = RequestSite(self.request)
@@ -25,10 +25,10 @@ class OpenIDMixin(object):
         else:
             path = "/"
         return '%s://%s%s' % (scheme, primary_site.domain, path)
-    
+
     def get_consumer(self):
         return consumer.Consumer(self.request.session, self.get_openid_store())
-    
+
     def get_openid_store(self):
         return openid_store
 
@@ -51,7 +51,7 @@ class StartOpenIDView(View, OpenIDMixin):
         else:
             sreg_request = sreg.SRegRequest(required=['email', 'nickname'])
             auth_request.addExtension(sreg_request)
-            
+
         if auth_request.shouldSendRedirect():
             url = auth_request.redirectURL(trust_root, return_to)
             return HttpResponseRedirect(url)
