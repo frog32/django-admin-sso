@@ -1,13 +1,12 @@
 from django.contrib.sites.models import RequestSite
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
 
 from openid.consumer import consumer
-from openid.extensions import ax, pape, sreg
-from openid.store.memstore import MemoryStore
+from openid.extensions import ax, sreg
 
 from django_sso import settings
 from django_sso.store import DjangoOpenIDStore
