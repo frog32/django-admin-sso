@@ -3,7 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 try:
     from django.utils.timezone import now
 except ImportError:
-    from datetime.datetime import now
+    from datetime import datetime
+    now = datetime.now
 
 from django_sso import settings
 
