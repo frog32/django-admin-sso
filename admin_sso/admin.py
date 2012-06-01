@@ -13,6 +13,8 @@ admin.site.register(Assignment, AssignmentAdmin)
 
 
 class OpenIDUserAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'email', 'user')
+    
     def get_urls(self):
         from django.conf.urls.defaults import patterns, url
         from admin_sso.views import StartOpenIDView, FinishOpenIDView
