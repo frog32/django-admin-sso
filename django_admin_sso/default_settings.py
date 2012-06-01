@@ -15,6 +15,6 @@ AX_MAPPING = (('http://schema.openid.net/contact/email', 'email'),
               ('http://axschema.org/namePerson/first', 'firstname'),
               ('http://axschema.org/namePerson/last', 'lastname'))
 
-DJANGO_SSO_ADD_LOGIN_BUTTON = getattr(settings, 'DJANGO_SSO_ADD_LOGIN_BUTTON', True)
+DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON = getattr(settings, 'DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON', True)
 
-DJANGO_SSO_OPENID_ENDPOINT = getattr(settings, 'DJANGO_SSO_OPENID_ENDPOINT', 'https://www.google.com/accounts/o8/id')
+DJANGO_ADMIN_SSO_OPENID_ENDPOINT = getattr(settings, 'DJANGO_ADMIN_SSO_OPENID_ENDPOINT', 'https://www.google.com/accounts/o8/id')

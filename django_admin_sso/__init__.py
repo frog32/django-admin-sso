@@ -9,7 +9,7 @@ except ImportError:
 else:
     class LazySettings(LazyObject):
         def _setup(self):
-            from django_sso import default_settings
+            from django_admin_sso import default_settings
             self._wrapped = Settings(default_settings)
 
     class Settings(object):

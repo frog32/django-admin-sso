@@ -8,14 +8,14 @@ from django.views.generic import View
 from openid.consumer import consumer
 from openid.extensions import ax, sreg
 
-from django_sso import settings
-from django_sso.store import DjangoOpenIDStore
+from django_admin_sso import settings
+from django_admin_sso.store import DjangoOpenIDStore
 
 openid_store = DjangoOpenIDStore()
 
 
 class OpenIDMixin(object):
-    return_to_url = 'admin:django_sso_openiduser_return'
+    return_to_url = 'admin:django_admin_sso_openiduser_return'
 
     def get_url(self, url=None):
         scheme = self.request.is_secure() and 'https' or 'http'
@@ -36,7 +36,7 @@ class OpenIDMixin(object):
 class StartOpenIDView(View, OpenIDMixin):
     def get(self, request, *args, **kwargs):
         c = self.get_consumer()
-        auth_request = c.begin(settings.DJANGO_SSO_OPENID_ENDPOINT)
+        auth_request = c.begin(settings.DJANGO_ADMIN_SSO_OPENID_ENDPOINT)
 
         trust_root = self.get_url()
         return_to = self.get_url(self.return_to_url)
@@ -59,7 +59,7 @@ class StartOpenIDView(View, OpenIDMixin):
         form_html = auth_request.formMarkup(trust_root, return_to,
                                             False, {'id': form_id})
         return render(
-            request, 'django_sso/request_form.html', {'html': form_html})
+            request, 'django_admin_sso/request_form.html', {'html': form_html})
 
 
 class FinishOpenIDView(View, OpenIDMixin):

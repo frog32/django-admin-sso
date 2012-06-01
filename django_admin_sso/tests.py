@@ -5,9 +5,9 @@ from openid.consumer.consumer import SuccessResponse
 from openid.consumer.discover import OpenIDServiceEndpoint
 from openid.message import Message, OPENID2_NS
 
-from django_sso import settings
-from django_sso.auth import DjangoSSOAuthBackend
-from django_sso.models import Assignment, OpenIDUser
+from django_admin_sso import settings
+from django_admin_sso.auth import DjangoSSOAuthBackend
+from django_admin_sso.models import Assignment, OpenIDUser
 
 SREG_NS = "http://openid.net/sreg/1.0"
 
@@ -15,9 +15,9 @@ SREG_NS = "http://openid.net/sreg/1.0"
 class AuthModuleTests(unittest.TestCase):
     def setUp(self):
         self.auth_module = DjangoSSOAuthBackend()
-        self.user1 = User.objects.create(username='django_sso1')
-        self.user2 = User.objects.create(username='django_sso2')
-        self.user3 = User.objects.create(username='django_sso3')
+        self.user1 = User.objects.create(username='django_admin_sso1')
+        self.user2 = User.objects.create(username='django_admin_sso2')
+        self.user3 = User.objects.create(username='django_admin_sso3')
         self.assginment1 = Assignment.objects.create(username='',
                                                      username_mode=settings.ASSIGNMENT_ANY,
                                                      domain='example.com',

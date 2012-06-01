@@ -2,10 +2,10 @@
 import os
 from setuptools import setup
 
-import django_sso
+import django_admin_sso
 setup(
     name='django-sso',
-    version=django_sso.__version__,
+    version=django_admin_sso.__version__,
     description='django sso solution',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     author='Marc Egli',
@@ -14,9 +14,9 @@ setup(
     license='BSD License',
     platforms=['OS Independent'],
     packages=[
-        'django_sso',
+        'django_admin_sso',
     ],
-    # package_data={'django_sso':'templates/*.html'},
+    # package_data={'django_admin_sso':'templates/*.html'},
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

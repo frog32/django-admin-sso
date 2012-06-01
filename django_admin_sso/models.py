@@ -6,7 +6,7 @@ except ImportError:
     from datetime import datetime
     now = datetime.now
 
-from django_sso import settings
+from django_admin_sso import settings
 
 
 class Assignment(models.Model):

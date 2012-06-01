@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'example.wsgi.application'
 TEMPLATE_DIRS = (
 )
 
-# add django_sso to INSTALLED_APPS
+# add django_admin_sso to INSTALLED_APPS
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,12 +78,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'django_sso',
+    'django_admin_sso',
 )
 
-# add django_sso.auth.DjangoSSOAuthBackend to AUTHENTICATION_BACKENDS
+# add django_admin_sso.auth.DjangoSSOAuthBackend to AUTHENTICATION_BACKENDS
 AUTHENTICATION_BACKENDS = (
-    'django_sso.auth.DjangoSSOAuthBackend',
+    'django_admin_sso.auth.DjangoSSOAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 

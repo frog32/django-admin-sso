@@ -2,5 +2,5 @@
 {% load i18n %}
 {% block content %}
 {{block.super}}
-<a href="{% url admin:django_sso_openiduser_start %}">{% trans "Log in using SSO" %}</a>
+<a href="{% url admin:django_admin_sso_openiduser_start %}">{% trans "Log in using SSO" %}</a>
 {% endblock content %}
