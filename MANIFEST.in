@@ -1,6 +1,6 @@
 include AUTHORS
 include LICENSE
 include README.rst
-recursive-include django_admin_sso/templates *.html
-recursive-include django_admin_sso/locale *.po
-recursive-include django_admin_sso/locale *.mo
+recursive-include admin_sso/templates *.html
+recursive-include admin_sso/locale *.po
+recursive-include admin_sso/locale *.mo

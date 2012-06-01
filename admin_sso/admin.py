@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from django_admin_sso import settings
-from django_admin_sso.models import Assignment, OpenIDUser
+from admin_sso import settings
+from admin_sso.models import Assignment, OpenIDUser
 
 
 class AssignmentAdmin(admin.ModelAdmin):
@@ -15,7 +15,7 @@ admin.site.register(Assignment, AssignmentAdmin)
 class OpenIDUserAdmin(admin.ModelAdmin):
     def get_urls(self):
         from django.conf.urls.defaults import patterns, url
-        from django_admin_sso.views import StartOpenIDView, FinishOpenIDView
+        from admin_sso.views import StartOpenIDView, FinishOpenIDView
         urls = super(OpenIDUserAdmin, self).get_urls()
         info = self.model._meta.app_label, self.model._meta.module_name
         my_urls = patterns('',
@@ -29,4 +29,4 @@ class OpenIDUserAdmin(admin.ModelAdmin):
 admin.site.register(OpenIDUser, OpenIDUserAdmin)
 
 if settings.DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON:
-    admin.site.login_template = 'django_admin_sso/login.html'
+    admin.site.login_template = 'admin_sso/login.html'

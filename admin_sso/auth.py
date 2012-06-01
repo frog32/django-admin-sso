@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 from openid.extensions import ax, pape, sreg
 
-from django_admin_sso import settings
-from django_admin_sso.models import Assignment, OpenIDUser
+from admin_sso import settings
+from admin_sso.models import Assignment, OpenIDUser
 
 
 class DjangoSSOAuthBackend(object):

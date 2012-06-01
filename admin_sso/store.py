@@ -35,7 +35,7 @@ from openid.association import Association as OIDAssociation
 from openid.store.interface import OpenIDStore
 from openid.store.nonce import SKEW
 
-from django_admin_sso.models import Association, Nonce
+from admin_sso.models import Association, Nonce
 
 
 class DjangoOpenIDStore(OpenIDStore):
