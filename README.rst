@@ -12,11 +12,14 @@ Installation
 
     pip install django-admin-sso
 
-3. Install dependencies:
+3. Add ``admin_sso`` to ``INSTALLED_APPS`` in your ``settings.py`` file::
 
-    * python-openid>=2.2.5
+    INSTALLED_APPS = (
+        ...
+        'admin_sso',
+        ...
+    )
 
-3. Add `admin_sso` to installed apps in your `settings.py` file
 4. Add the django-admin authentication backend::
 
     AUTHENTICATION_BACKENDS = (
@@ -24,4 +27,4 @@ Installation
         'django.contrib.auth.backends.ModelBackend',
     )
 
-5. Run syncdb to create the needed database tables.
+5. Run ``python manage.py syncdb`` to create the needed database tables.
