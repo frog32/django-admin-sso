@@ -43,7 +43,7 @@ Any Remote User -> Local User X
 
 Remote User -> Local User
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* Select Username mode "matches" _or_ "don't match".
+* Select Username mode "matches" *or* "don't match".
 * Set username to [not] match by.
 * Set Domain to your authenticating domain.
 * Select your local user from the User drop down.
