@@ -27,9 +27,6 @@ setup(
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
-    requires=[
-        'Django(>=1.3)',
-        'python_openid(>=2.2.5)',
-    ],
+    install_requires=('Django>=1.3', 'python-openid>=2.2.5'),
     include_package_data=True,
 )
