@@ -18,7 +18,7 @@ setup(
     ],
     # package_data={'admin_sso':'templates/*.html'},
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
