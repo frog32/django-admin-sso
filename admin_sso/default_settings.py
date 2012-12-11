@@ -18,3 +18,5 @@ AX_MAPPING = (('http://schema.openid.net/contact/email', 'email'),
 DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON = getattr(settings, 'DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON', True)
 
 DJANGO_ADMIN_SSO_OPENID_ENDPOINT = getattr(settings, 'DJANGO_ADMIN_SSO_OPENID_ENDPOINT', 'https://www.google.com/accounts/o8/id')
+
+AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
