@@ -1,5 +1,10 @@
+try:
+    from django.contrib.auth import get_user_model
+except ImportError:  # django < 1.5
+    from django.contrib.auth.models import User
+else:
+    User = get_user_model()
 from django.utils import unittest
-from django.contrib.auth.models import User
 
 from openid.consumer.consumer import SuccessResponse
 from openid.consumer.discover import OpenIDServiceEndpoint
