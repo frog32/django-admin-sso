@@ -16,7 +16,7 @@ class OpenIDUserAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'email', 'user')
     
     def get_urls(self):
-        from django.conf.urls.defaults import patterns, url
+        from django.conf.urls import patterns, url
         from admin_sso.views import StartOpenIDView, FinishOpenIDView
         urls = super(OpenIDUserAdmin, self).get_urls()
         info = self.model._meta.app_label, self.model._meta.module_name
