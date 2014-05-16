@@ -31,6 +31,7 @@ setup(
         'Django>=1.4',
         'python-openid>=2.2.5',
         'django-discover-runner>=1.0',
+        'coverage==3.7.1',
     ),
     include_package_data=True,
 )

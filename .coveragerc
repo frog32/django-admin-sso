@@ -1,0 +1,4 @@
+[run]
+source = admin_sso
+omit = *migrations*, *tests*
+
