@@ -11,5 +11,6 @@ install:
   - pip install $DJANGO_VERSION --use-mirrors
   - python setup.py install
 # command to run tests, e.g. python setup.py test
-script: "coverage run manage.py test"
-after-script: "coverage report -m"
+script:
+  - "coverage run manage.py test"
+  - "coverage report -m"
