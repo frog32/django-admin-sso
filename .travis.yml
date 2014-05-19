@@ -11,7 +11,10 @@ install:
   - pip install $DJANGO_VERSION --use-mirrors
   - python setup.py install
   - pip install -r test_requirements.txt
+  - pip install coveralls
 # command to run tests, e.g. python setup.py test
 script:
   - "coverage run manage.py test"
   - "coverage report -m"
+after_success:
+  - coveralls

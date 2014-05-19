@@ -1,6 +1,16 @@
 ================
 Django admin SSO
 ================
+
+.. image:: https://travis-ci.org/frog32/django-admin-sso.png?branch=master
+    :target: https://travis-ci.org/frog32/django-admin-sso
+
+.. image:: https://coveralls.io/repos/frog32/django-admin-sso/badge.png?branch=master
+    :target: https://coveralls.io/r/frog32/django-admin-sso
+
+.. image:: https://pypip.in/v/django-admin-sso/badge.png
+    :target: https://pypi.python.org/pypi/django-admin-sso/
+
 Django admin SSO lets users login to a django admin using an openid provider. It
 then looks up the email address of the new user and looks up the rights for him.
 
