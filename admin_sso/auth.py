@@ -7,10 +7,8 @@ except ImportError:  # django < 1.5
 else:
     User = get_user_model()
 
-from openid.extensions import ax, pape, sreg
-
 from admin_sso import settings
-from admin_sso.models import Assignment, OpenIDUser
+from admin_sso.models import Assignment
 
 
 class DjangoSSOAuthBackend(object):
@@ -22,35 +20,14 @@ class DjangoSSOAuthBackend(object):
             return None
 
     def authenticate(self, **kwargs):
-        response = kwargs.pop('openid_response', None)
-        if not response:
+        sso_email = kwargs.pop('sso_email', None)
+        if not sso_email:
             return None
-        user_data = {}
-        user_data['claimed_id'] = response.getDisplayIdentifier()
-        sreg_response = sreg.SRegResponse.fromSuccessResponse(response)
-        if sreg_response:
-            for field_name in ('email', 'fullname',):
-                user_data[field_name] = sreg_response.get(field_name, None)
 
-        ax_response = ax.FetchResponse.fromSuccessResponse(response)
-        if ax_response:
-            for ax_name, field_name in settings.AX_MAPPING:
-                value = ax_response.getSingle(ax_name)
-                user_data[field_name] = value or user_data.get(field_name)
-        try:
-            openid_user = OpenIDUser.objects.get(
-                claimed_id=user_data['claimed_id'])
-        except OpenIDUser.DoesNotExist:
-            pass
-        else:
-            openid_user.user.active_openid_user = openid_user
-            return openid_user.user
-
-        email = user_data.get('email')
-        if not email:
+        if not sso_email:
             return None
         try:
-            username, domain = email.split('@')
+            username, domain = sso_email.split('@')
         except ValueError:
             return None
         possible_assignments = Assignment.objects.filter(domain=domain)
@@ -69,10 +46,4 @@ class DjangoSSOAuthBackend(object):
                     break
         if used_assignment is None:
             return None
-        first_and_lastname = u"%s %s" % (
-            user_data.pop('firstname', ""), user_data.pop('lastname', ""))
-        user_data['fullname'] = user_data['fullname'] or first_and_lastname
-        user_data.update(user=used_assignment.user)
-        openid_user = OpenIDUser.objects.create(**user_data)
-        openid_user.user.active_openid_user = openid_user
-        return openid_user.user
+        return used_assignment.user

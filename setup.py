@@ -29,7 +29,7 @@ setup(
     ],
     install_requires=(
         'Django>=1.4',
-        'python-openid>=2.2.5',
+        'oauth2client>=1.2',
     ),
     include_package_data=True,
 )

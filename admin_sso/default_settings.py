@@ -20,3 +20,6 @@ DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON = getattr(settings, 'DJANGO_ADMIN_SSO_ADD_LOGI
 DJANGO_ADMIN_SSO_OPENID_ENDPOINT = getattr(settings, 'DJANGO_ADMIN_SSO_OPENID_ENDPOINT', 'https://www.google.com/accounts/o8/id')
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+GOOGLE_OAUTH_CLIENT_ID = getattr(settings, 'GOOGLE_OAUTH_CLIENT_ID', None)
+GOOGLE_OAUTH_CLIENT_SECRET = getattr(settings, 'GOOGLE_OAUTH_CLIENT_SECRET', None)
