@@ -6,13 +6,9 @@ else:
     User = get_user_model()
 from django.utils import unittest
 
-from openid.consumer.consumer import SuccessResponse
-from openid.consumer.discover import OpenIDServiceEndpoint
-from openid.message import Message, OPENID2_NS
-
 from admin_sso import settings
 from admin_sso.auth import DjangoSSOAuthBackend
-from admin_sso.models import Assignment, OpenIDUser
+from admin_sso.models import Assignment
 
 SREG_NS = "http://openid.net/sreg/1.0"
 
@@ -44,47 +40,39 @@ class AuthModuleTests(unittest.TestCase):
         self.user2.delete()
         self.user3.delete()
         Assignment.objects.all().delete()
-        OpenIDUser.objects.all().delete()
 
     def test_domain_matches(self):
-        response = self.create_sreg_response(fullname="User Name", email="foo@example.com", identifier='7324')
-        user = self.auth_module.authenticate(openid_response=response)
+        email = "foo@example.com"
+        user = self.auth_module.authenticate(sso_email=email)
         self.assertEquals(user, self.user1)
 
     def test_invalid_domain(self):
-        response = self.create_sreg_response(email='someone@someotherdomain.com')
-        user = self.auth_module.authenticate(openid_response=response)
+        email = 'someone@someotherdomain.com'
+        user = self.auth_module.authenticate(sso_email=email)
         self.assertIsNone(user)
 
     def test_domain_matches_and_username_ends_with_bar(self):
-        response = self.create_sreg_response(fullname="User Name", email="foobar@example.com", identifier='5673')
-        user = self.auth_module.authenticate(openid_response=response)
-        self.assertEquals(user, self.user2)
-
-    def test_login_twice_and_reuse_stored_openid(self):
-        response = self.create_sreg_response(fullname="User Name", email="foobar@example.com", identifier='1111')
-        user = self.auth_module.authenticate(openid_response=response)
-        self.assertEquals(user, self.user2)
-        response = self.create_sreg_response(identifier='1111')
-        user = self.auth_module.authenticate(openid_response=response)
+        email = "foobar@example.com"
+        user = self.auth_module.authenticate(sso_email=email)
         self.assertEquals(user, self.user2)
 
     def test_domain_matches_and_username_doesnt_begin_with_foo(self):
-        response = self.create_sreg_response(fullname="User Name", email="bar@example.com", identifier='3476')
-        user = self.auth_module.authenticate(openid_response=response)
+        email = "bar@example.com"
+        user = self.auth_module.authenticate(sso_email=email)
         self.assertEquals(user, self.user3)
+
+    def test_invalid_email(self):
+        email = 'invalid'
+        user = self.auth_module.authenticate(sso_email=email)
+        self.assertEquals(user, None)
+
+    def test_no_sso_email_param(self):
+        user = self.auth_module.authenticate()
+        self.assertEquals(user, None)
 
     def test_change_weight(self):
         self.assginment2.weight = 50
         self.assginment2.save()
-        response = self.create_sreg_response(fullname="User Name", email="foobar@example.com", identifier='5673')
-        user = self.auth_module.authenticate(openid_response=response)
+        email = "foobar@example.com"
+        user = self.auth_module.authenticate(sso_email=email)
         self.assertEquals(user, self.user1)
-
-    def create_sreg_response(self, fullname='', email='', identifier=''):
-        message = Message(OPENID2_NS)
-        message.setArg(SREG_NS, "fullname", fullname)
-        message.setArg(SREG_NS, "email", email)
-        endpoint = OpenIDServiceEndpoint()
-        endpoint.display_identifier = identifier
-        return SuccessResponse(endpoint, message, signed_fields=message.toPostArgs().keys())

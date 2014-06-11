@@ -87,6 +87,15 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = 'your client id here'
+DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = 'your client secret here'
+
+# these are the default values
+# they are only set here because unit tests rely on them
+DJANGO_ADMIN_SSO_AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
+DJANGO_ADMIN_SSO_REVOKE_URI = 'https://accounts.google.com/o/oauth2/revoke'
+DJANGO_ADMIN_SSO_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

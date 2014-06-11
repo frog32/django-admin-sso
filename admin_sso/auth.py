@@ -21,11 +21,10 @@ class DjangoSSOAuthBackend(object):
 
     def authenticate(self, **kwargs):
         sso_email = kwargs.pop('sso_email', None)
-        if not sso_email:
-            return None
 
         if not sso_email:
             return None
+
         try:
             username, domain = sso_email.split('@')
         except ValueError:
