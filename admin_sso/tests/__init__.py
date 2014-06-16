@@ -1,4 +1,4 @@
-from unittest import skipIf
+from django.utils.unittest import skipIf
 
 from admin_sso import settings
 
