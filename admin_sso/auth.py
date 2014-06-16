@@ -1,5 +1,3 @@
-import fnmatch
-
 try:
     from django.contrib.auth import get_user_model
 except ImportError:  # django < 1.5
@@ -20,29 +18,13 @@ class DjangoSSOAuthBackend(object):
             return None
 
     def authenticate(self, **kwargs):
+        if not settings.DJANGO_ADMIN_SSO_USE_OAUTH:
+            from .openid.auth import authenticate as authenticate_openid
+            return authenticate_openid(self, **kwargs)
+
         sso_email = kwargs.pop('sso_email', None)
 
-        if not sso_email:
+        assignment = Assignment.objects.for_email(sso_email)
+        if assignment is None:
             return None
-
-        try:
-            username, domain = sso_email.split('@')
-        except ValueError:
-            return None
-        possible_assignments = Assignment.objects.filter(domain=domain)
-        used_assignment = None
-        for assignment in possible_assignments:
-            if assignment.username_mode == settings.ASSIGNMENT_ANY:
-                used_assignment = assignment
-                break
-            elif assignment.username_mode == settings.ASSIGNMENT_MATCH:
-                if fnmatch.fnmatch(username, assignment.username):
-                    used_assignment = assignment
-                    break
-            elif assignment.username_mode == settings.ASSIGNMENT_EXCEPT:
-                if not fnmatch.fnmatch(username, assignment.username):
-                    used_assignment = assignment
-                    break
-        if used_assignment is None:
-            return None
-        return used_assignment.user
+        return assignment.user

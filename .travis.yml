@@ -15,6 +15,7 @@ install:
 # command to run tests, e.g. python setup.py test
 script:
   - "coverage run manage.py test"
+  - "DJANGO_SETTINGS_MODULE=example.settings_openid coverage run -a manage.py test"
   - "coverage report -m"
 after_success:
   - coveralls
