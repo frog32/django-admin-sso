@@ -15,6 +15,7 @@ setup(
     platforms=['OS Independent'],
     packages=[
         'admin_sso',
+        'admin_sso.openid',
     ],
     # package_data={'admin_sso':'templates/*.html'},
     classifiers=[
