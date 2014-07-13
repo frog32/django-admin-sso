@@ -60,4 +60,4 @@ class Assignment(models.Model):
 
 
 if not settings.DJANGO_ADMIN_SSO_USE_OAUTH:
-    from .openid.models import OpenIDUser, Association, Nonce
+    from .openid.models import OpenIDUser, Association, Nonce  # noqa
