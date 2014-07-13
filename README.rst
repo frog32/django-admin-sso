@@ -12,7 +12,7 @@ Django admin SSO
     :target: https://pypi.python.org/pypi/django-admin-sso/
 
 Django admin SSO lets users login to a django admin using an openid provider. It
-then looks up the email address of the new user and looks up the rights for him.
+then looks up the email address of the new user and looks up the rights for them.
 
 Installation
 ------------
@@ -72,6 +72,6 @@ Changelog
 1.0
 ~~~
 
-* Add support for OAuth2.0 since google closes it's OpenID endpoint https://developers.google.com/accounts/docs/OpenID
+* Add support for OAuth2.0 since google closes its OpenID endpoint https://developers.google.com/accounts/docs/OpenID
 * Using OpenID is now deprecated and OpenID support will be removed in a future release.
 * Add more tests to get a decent coverage.
