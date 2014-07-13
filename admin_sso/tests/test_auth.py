@@ -57,6 +57,13 @@ class AuthModuleTests(unittest.TestCase):
         user = self.auth_module.authenticate(openid_response=response)
         self.assertEqual(user, self.user)
 
+    def test_get_user(self):
+        user = self.auth_module.get_user(self.user.id)
+        self.assertEqual(user, self.user)
+
+        user = self.auth_module.get_user(self.user.id + 42)
+        self.assertEqual(user, None)
+
 
 class AssignmentManagerTests(unittest.TestCase):
     def setUp(self):
