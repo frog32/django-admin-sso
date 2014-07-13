@@ -42,6 +42,12 @@ Installation
     DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = 'your client id here'
     DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = 'your client secret here'
 
+Navigate to Google's
+`Developer Console <https://console.developers.google.com/project>`, create a
+new project, and create a new client ID under the menu point "APIs & AUTH",
+"Credentials". The redirect URI should be of the form
+``http://example.com/admin/admin_sso/assignment/end/``
+
 If you don't specify a client id django-admin-sso will fallback to openid.
 
 6. Run syncdb to create the needed database tables.
@@ -51,6 +57,7 @@ If you don't specify a client id django-admin-sso will fallback to openid.
 
 Assignments
 -----------
+
 Any Remote User -> Local User X
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Select Username mode "any".
