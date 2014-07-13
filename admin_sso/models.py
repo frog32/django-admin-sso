@@ -1,11 +1,6 @@
 import fnmatch
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-try:
-    from django.utils.timezone import now
-except ImportError:
-    from datetime import datetime
-    now = datetime.now
 
 from admin_sso import settings
 
