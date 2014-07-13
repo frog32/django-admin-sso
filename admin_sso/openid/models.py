@@ -4,14 +4,12 @@ from django.utils.translation import ugettext_lazy as _
 
 from admin_sso import settings
 
-User = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
-
 
 class OpenIDUser(models.Model):
     claimed_id = models.TextField(max_length=2047)
     email = models.EmailField()
     fullname = models.CharField(max_length=255)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     last_login = models.DateTimeField(_('last login'), default=now)
 
     class Meta:

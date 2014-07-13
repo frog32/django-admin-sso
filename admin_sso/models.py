@@ -4,8 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from admin_sso import settings
 
-User = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
-
 
 class AssignmentManager(models.Manager):
     def for_email(self, email):
@@ -41,7 +39,7 @@ class Assignment(models.Model):
     domain = models.CharField(max_length=255)
     copy = models.BooleanField(default=False)
     weight = models.PositiveIntegerField(default=0)
-    user = models.ForeignKey(User, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
 
     class Meta:
         verbose_name = _('Assignment')
