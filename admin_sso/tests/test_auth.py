@@ -35,13 +35,13 @@ class AuthModuleTests(unittest.TestCase):
 
     def test_empty_authenticate(self):
         user = self.auth_module.authenticate()
-        self.assertEquals(user, None)
+        self.assertEqual(user, None)
 
     @skipIfOpenID
     def test_simple_assignment(self):
         email = "foo@example.com"
         user = self.auth_module.authenticate(sso_email=email)
-        self.assertEquals(user, self.user)
+        self.assertEqual(user, self.user)
 
     def create_sreg_response(self, fullname='', email='', identifier=''):
         message = Message(OPENID2_NS)
@@ -55,7 +55,7 @@ class AuthModuleTests(unittest.TestCase):
     def test_domain_matches(self):
         response = self.create_sreg_response(fullname="User Name", email="foo@example.com", identifier='7324')
         user = self.auth_module.authenticate(openid_response=response)
-        self.assertEquals(user, self.user)
+        self.assertEqual(user, self.user)
 
 
 class AssignmentManagerTests(unittest.TestCase):
@@ -84,7 +84,7 @@ class AssignmentManagerTests(unittest.TestCase):
     def test_domain_matches(self):
         email = "foo@example.com"
         user = Assignment.objects.for_email(email)
-        self.assertEquals(user, self.assignment1)
+        self.assertEqual(user, self.assignment1)
 
     def test_invalid_domain(self):
         email = 'someone@someotherdomain.com'
@@ -94,21 +94,21 @@ class AssignmentManagerTests(unittest.TestCase):
     def test_domain_matches_and_username_ends_with_bar(self):
         email = "foobar@example.com"
         user = Assignment.objects.for_email(email)
-        self.assertEquals(user, self.assignment2)
+        self.assertEqual(user, self.assignment2)
 
     def test_domain_matches_and_username_doesnt_begin_with_foo(self):
         email = "bar@example.com"
         user = Assignment.objects.for_email(email)
-        self.assertEquals(user, self.assignment3)
+        self.assertEqual(user, self.assignment3)
 
     def test_invalid_email(self):
         email = 'invalid'
         user = Assignment.objects.for_email(email)
-        self.assertEquals(user, None)
+        self.assertEqual(user, None)
 
     def test_change_weight(self):
         self.assignment2.weight = 50
         self.assignment2.save()
         email = "foobar@example.com"
         user = Assignment.objects.for_email(email)
-        self.assertEquals(user, self.assignment1)
+        self.assertEqual(user, self.assignment1)

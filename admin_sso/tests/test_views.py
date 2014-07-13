@@ -71,8 +71,8 @@ class OAuthViewTest(TestCase):
         rv = self.client.get(end_url + '?code=xxx')
         self.assertEqual(rv.status_code, 302)
         self.assertTrue('Location' in rv)
-        self.assertEquals(self.client.session['_auth_user_id'], self.user.id)
-        self.assertEquals(self.client.session['_auth_user_backend'], 'admin_sso.auth.DjangoSSOAuthBackend')
+        self.assertEqual(self.client.session['_auth_user_id'], self.user.id)
+        self.assertEqual(self.client.session['_auth_user_backend'], 'admin_sso.auth.DjangoSSOAuthBackend')
         setattr(views, 'flow_override', None)
 
     def test_end_with_email_not_verified(self):
