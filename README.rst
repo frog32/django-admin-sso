@@ -44,7 +44,7 @@ Installation
     DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = 'your client secret here'
 
 Navigate to Google's
-`Developer Console <https://console.developers.google.com/project>`, create a
+`Developer Console <https://console.developers.google.com/project>`_, create a
 new project, and create a new client ID under the menu point "APIs & AUTH",
 "Credentials". The redirect URI should be of the form
 ``http://example.com/admin/admin_sso/assignment/end/``
