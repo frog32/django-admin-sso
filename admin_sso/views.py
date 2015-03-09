@@ -49,7 +49,7 @@ def end(request):
     except FlowExchangeError:
         return HttpResponseRedirect(reverse('admin:index'))
 
-    if credentials.id_token['verified_email']:
+    if credentials.id_token['email_verified']:
         email = credentials.id_token['email']
         user = authenticate(sso_email=email)
         if user and user.is_active:

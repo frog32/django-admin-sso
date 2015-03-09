@@ -66,7 +66,7 @@ class OAuthViewTest(TestCase):
 
     def test_end_with_sucess(self):
         from admin_sso import views
-        setattr(views, 'flow_override', FlowMock({'verified_email': True, 'email': 'test@example.com'}))
+        setattr(views, 'flow_override', FlowMock({'email_verified': True, 'email': 'test@example.com'}))
         end_url = reverse('admin:admin_sso_assignment_end')
         rv = self.client.get(end_url + '?code=xxx')
         self.assertEqual(rv.status_code, 302)
@@ -77,7 +77,7 @@ class OAuthViewTest(TestCase):
 
     def test_end_with_email_not_verified(self):
         from admin_sso import views
-        setattr(views, 'flow_override', FlowMock({'verified_email': False, 'email': 'test@example.com'}))
+        setattr(views, 'flow_override', FlowMock({'email_verified': False, 'email': 'test@example.com'}))
         end_url = reverse('admin:admin_sso_assignment_end')
         rv = self.client.get(end_url + '?code=xxx')
         self.assertEqual(rv.status_code, 302)
