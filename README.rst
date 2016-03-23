@@ -1,4 +1,4 @@
-**``django-admin-sso`` has moved to `matthiask <https://github.com/matthiask/django-admin-sso>`_.**
+``django-admin-sso`` has moved to https://github.com/matthiask/django-admin-sso
 
 
 ================
