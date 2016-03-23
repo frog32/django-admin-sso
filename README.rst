@@ -1,3 +1,6 @@
+**``django-admin-sso`` has moved to `matthiask <https://github.com/matthiask/django-admin-sso>`_.**
+
+
 ================
 Django admin SSO
 ================
